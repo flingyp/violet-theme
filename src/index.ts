@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs'
 import getTheme from './theme'
+
 fs.mkdir('./themes', { recursive: true })
   .then(() =>
     Promise.all([
@@ -8,7 +9,7 @@ fs.mkdir('./themes', { recursive: true })
         `${JSON.stringify(
           getTheme({
             style: 'light',
-            name: 'Vitesse Light',
+            name: 'Violet Light',
           }),
           null,
           2,
@@ -19,7 +20,7 @@ fs.mkdir('./themes', { recursive: true })
         `${JSON.stringify(
           getTheme({
             style: 'dark',
-            name: 'Vitesse Dark',
+            name: 'Violet Dark',
           }),
           null,
           2,

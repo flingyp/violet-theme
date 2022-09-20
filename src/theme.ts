@@ -1,23 +1,25 @@
+/* eslint-disable quote-props */
 import { toArray } from '@antfu/utils'
 import { getColors } from './primer'
-import { VitesseThemes } from './colors'
+import { VioletThemes } from './colors'
 
 export default function getTheme({ style, name, soft = false, black = false }) {
   // Usage: `pick({ light: "lightblue", dark: "darkblue" })`
   const pick = options => options[style]
 
-  const vitesse = (key: keyof typeof VitesseThemes, op = '') => pick({ light: VitesseThemes[key][1] + op, dark: VitesseThemes[key][0] + op })
+  const violet = (key: keyof typeof VioletThemes, op = '') =>
+    pick({ light: VioletThemes[key][1] + op, dark: VioletThemes[key][0] + op })
 
   const primer = getColors(style)
 
-  const foreground = vitesse('foreground')
-  const secondaryForeground = vitesse('secondaryForeground')
-  const activeForeground = vitesse('activeForeground')
-  const primary = vitesse('primary')
+  const foreground = violet('foreground')
+  const secondaryForeground = violet('secondaryForeground')
+  const activeForeground = violet('activeForeground')
+  const primary = violet('primary')
 
-  const border = soft ? vitesse('lowBorder') : vitesse('border')
-  const background = black ? '#000' : soft ? vitesse('lowBackground') : vitesse('background')
-  const activeBackground = black ? '#050505' : soft ? vitesse('lowActiveBackground') : vitesse('activeBackground')
+  const border = soft ? violet('lowBorder') : violet('border')
+  const background = black ? '#000' : soft ? violet('lowBackground') : violet('background')
+  const activeBackground = black ? '#050505' : soft ? violet('lowActiveBackground') : violet('activeBackground')
 
   const selectionBackgroundInActive = pick({ light: '#22222208', dark: '#eeeeee08' })
   const selectionBackgroundActive = pick({ light: '#22222215', dark: '#eeeeee15' })
@@ -27,10 +29,10 @@ export default function getTheme({ style, name, soft = false, black = false }) {
     name,
     base: pick({ light: 'vs', dark: 'vs-dark' }),
     colors: {
-      'focusBorder': '#00000000',
+      focusBorder: '#00000000',
       foreground,
-      'descriptionForeground': secondaryForeground,
-      'errorForeground': vitesse('red'),
+      descriptionForeground: secondaryForeground,
+      errorForeground: violet('red'),
 
       'textLink.foreground': primary,
       'textLink.activeForeground': primary,
@@ -56,7 +58,7 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'input.border': border,
       'input.foreground': foreground,
       'input.placeholderForeground': secondaryForeground,
-      'inputOption.activeBackground': vitesse('ignored'),
+      'inputOption.activeBackground': violet('ignored'),
 
       'badge.foreground': background,
       'badge.background': secondaryForeground,
@@ -70,7 +72,7 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'titleBar.border': activeBackground,
 
       'activityBar.foreground': foreground,
-      'activityBar.inactiveForeground': vitesse('ignored'),
+      'activityBar.inactiveForeground': violet('ignored'),
       'activityBar.background': background,
       'activityBarBadge.foreground': background,
       'activityBarBadge.background': activeForeground,
@@ -101,9 +103,9 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'notifications.foreground': foreground,
       'notifications.background': background,
       'notifications.border': border,
-      'notificationsErrorIcon.foreground': vitesse('red'),
-      'notificationsWarningIcon.foreground': vitesse('orange'),
-      'notificationsInfoIcon.foreground': vitesse('blue'),
+      'notificationsErrorIcon.foreground': violet('red'),
+      'notificationsWarningIcon.foreground': violet('orange'),
+      'notificationsInfoIcon.foreground': violet('blue'),
 
       'pickerGroup.border': primer.gray[2],
       'pickerGroup.foreground': foreground,
@@ -144,7 +146,7 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'editorWidget.background': background,
       'editor.foldBackground': pick({ light: '#22222210', dark: '#eeeeee10' }),
       'editor.lineHighlightBackground': activeBackground,
-      'editorLineNumber.foreground': vitesse('ignored'),
+      'editorLineNumber.foreground': violet('ignored'),
       'editorLineNumber.activeForeground': activeForeground,
       'editorIndentGuide.background': pick({ light: '#00000015', dark: '#ffffff15' }),
       'editorIndentGuide.activeBackground': pick({ light: '#00000030', dark: '#ffffff30' }),
@@ -164,9 +166,9 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'diffEditor.removedTextBackground': pick({ light: '#ab595910', dark: '#ab595922' }),
 
       'scrollbar.shadow': pick({ light: '#6a737d33', dark: '#0008' }),
-      'scrollbarSlider.background': vitesse('faded'),
-      'scrollbarSlider.hoverBackground': vitesse('ignored'),
-      'scrollbarSlider.activeBackground': vitesse('ignored'),
+      'scrollbarSlider.background': violet('faded'),
+      'scrollbarSlider.hoverBackground': violet('ignored'),
+      'scrollbarSlider.activeBackground': violet('ignored'),
       'editorOverviewRuler.border': primer.white,
 
       'panel.background': background,
@@ -179,40 +181,40 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'terminal.foreground': foreground,
       'terminal.selectionBackground': selectionBackground,
       'terminal.ansiBrightBlack': pick({ light: '#aaaaaa', dark: '#777777' }),
-      'terminal.ansiBrightBlue': vitesse('blue'),
-      'terminal.ansiBrightCyan': vitesse('cyan'),
-      'terminal.ansiBrightGreen': vitesse('green'),
-      'terminal.ansiBrightMagenta': vitesse('magenta'),
-      'terminal.ansiBrightRed': vitesse('red'),
+      'terminal.ansiBrightBlue': violet('blue'),
+      'terminal.ansiBrightCyan': violet('cyan'),
+      'terminal.ansiBrightGreen': violet('green'),
+      'terminal.ansiBrightMagenta': violet('magenta'),
+      'terminal.ansiBrightRed': violet('red'),
       'terminal.ansiBrightWhite': pick({ light: '#dddddd', dark: '#ffffff' }),
-      'terminal.ansiBrightYellow': vitesse('yellow'),
-      'terminal.ansiBlack': pick({ light: VitesseThemes.background[0], dark: VitesseThemes.foreground[1] }),
-      'terminal.ansiBlue': vitesse('blue'),
-      'terminal.ansiCyan': vitesse('cyan'),
-      'terminal.ansiGreen': vitesse('green'),
-      'terminal.ansiMagenta': vitesse('magenta'),
-      'terminal.ansiRed': vitesse('red'),
-      'terminal.ansiWhite': pick({ light: VitesseThemes.foreground[0], dark: VitesseThemes.foreground[0] }),
-      'terminal.ansiYellow': vitesse('yellow'),
+      'terminal.ansiBrightYellow': violet('yellow'),
+      'terminal.ansiBlack': pick({ light: VioletThemes.background[0], dark: VioletThemes.foreground[1] }),
+      'terminal.ansiBlue': violet('blue'),
+      'terminal.ansiCyan': violet('cyan'),
+      'terminal.ansiGreen': violet('green'),
+      'terminal.ansiMagenta': violet('magenta'),
+      'terminal.ansiRed': violet('red'),
+      'terminal.ansiWhite': pick({ light: VioletThemes.foreground[0], dark: VioletThemes.foreground[0] }),
+      'terminal.ansiYellow': violet('yellow'),
 
-      'gitDecoration.addedResourceForeground': vitesse('green'),
-      'gitDecoration.modifiedResourceForeground': vitesse('blue'),
-      'gitDecoration.deletedResourceForeground': vitesse('red'),
-      'gitDecoration.untrackedResourceForeground': vitesse('cyan'),
-      'gitDecoration.ignoredResourceForeground': vitesse('ignored'),
-      'gitDecoration.conflictingResourceForeground': vitesse('orange'),
-      'gitDecoration.submoduleResourceForeground': vitesse('secondaryForeground'),
+      'gitDecoration.addedResourceForeground': violet('green'),
+      'gitDecoration.modifiedResourceForeground': violet('blue'),
+      'gitDecoration.deletedResourceForeground': violet('red'),
+      'gitDecoration.untrackedResourceForeground': violet('cyan'),
+      'gitDecoration.ignoredResourceForeground': violet('ignored'),
+      'gitDecoration.conflictingResourceForeground': violet('orange'),
+      'gitDecoration.submoduleResourceForeground': violet('secondaryForeground'),
 
-      'editorGutter.modifiedBackground': vitesse('blue'),
-      'editorGutter.addedBackground': vitesse('green'),
-      'editorGutter.deletedBackground': vitesse('red'),
+      'editorGutter.modifiedBackground': violet('blue'),
+      'editorGutter.addedBackground': violet('green'),
+      'editorGutter.deletedBackground': violet('red'),
 
-      'editorBracketHighlight.foreground1': vitesse('cyan'),
-      'editorBracketHighlight.foreground2': vitesse('green'),
-      'editorBracketHighlight.foreground3': vitesse('orange'),
-      'editorBracketHighlight.foreground4': vitesse('magenta'),
-      'editorBracketHighlight.foreground5': vitesse('yellow'),
-      'editorBracketHighlight.foreground6': vitesse('blue'),
+      'editorBracketHighlight.foreground1': violet('cyan'),
+      'editorBracketHighlight.foreground2': violet('green'),
+      'editorBracketHighlight.foreground3': violet('orange'),
+      'editorBracketHighlight.foreground4': violet('magenta'),
+      'editorBracketHighlight.foreground5': violet('yellow'),
+      'editorBracketHighlight.foreground6': violet('blue'),
 
       'debugToolBar.background': background,
       'editor.stackFrameHighlightBackground': pick({ light: primer.yellow[1], dark: '#a707' }),
@@ -228,38 +230,34 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       'welcomePage.buttonBackground': primer.gray[1],
       'welcomePage.buttonHoverBackground': primer.gray[2],
 
-      'problemsErrorIcon.foreground': vitesse('red'),
-      'problemsWarningIcon.foreground': vitesse('orange'),
-      'problemsInfoIcon.foreground': vitesse('blue'),
+      'problemsErrorIcon.foreground': violet('red'),
+      'problemsWarningIcon.foreground': violet('orange'),
+      'problemsInfoIcon.foreground': violet('blue'),
 
-      'editorError.foreground': vitesse('red'),
-      'editorWarning.foreground': vitesse('orange'),
-      'editorInfo.foreground': vitesse('blue'),
-      'editorHint.foreground': vitesse('green'),
+      'editorError.foreground': violet('red'),
+      'editorWarning.foreground': violet('orange'),
+      'editorInfo.foreground': violet('blue'),
+      'editorHint.foreground': violet('green'),
 
-      'editorGutter.commentRangeForeground': vitesse('ignored'),
-      'editorGutter.foldingControlForeground': vitesse('secondaryForeground'),
+      'editorGutter.commentRangeForeground': violet('ignored'),
+      'editorGutter.foldingControlForeground': violet('secondaryForeground'),
 
-      'editorInlayHint.foreground': vitesse('punctuation'),
+      'editorInlayHint.foreground': violet('punctuation'),
       'editorInlayHint.background': '#00000000',
     },
     semanticHighlighting: true,
     semanticTokenColors: {
-      namespace: vitesse('namespace'),
-      property: vitesse('property'),
-      interface: vitesse('interface'),
-      type: vitesse('interface'),
-      class: vitesse('class'),
+      namespace: violet('namespace'),
+      property: violet('property'),
+      interface: violet('interface'),
+      type: violet('interface'),
+      class: violet('class'),
     },
     tokenColors: [
       {
-        scope: [
-          'comment',
-          'punctuation.definition.comment',
-          'string.comment',
-        ],
+        scope: ['comment', 'punctuation.definition.comment', 'string.comment'],
         settings: {
-          foreground: vitesse('comment'),
+          foreground: violet('comment'),
         },
       },
       {
@@ -282,24 +280,19 @@ export default function getTheme({ style, name, soft = false, black = false }) {
           'punctuation',
         ],
         settings: {
-          foreground: vitesse('punctuation'),
+          foreground: violet('punctuation'),
         },
       },
       {
-        scope: [
-          'constant',
-          'entity.name.constant',
-          'variable.language',
-          'meta.definition.variable',
-        ],
+        scope: ['constant', 'entity.name.constant', 'variable.language', 'meta.definition.variable'],
         settings: {
-          foreground: vitesse('constant'),
+          foreground: violet('constant'),
         },
       },
       {
         scope: ['entity', 'entity.name'],
         settings: {
-          foreground: vitesse('function'),
+          foreground: violet('function'),
         },
       },
       {
@@ -309,27 +302,21 @@ export default function getTheme({ style, name, soft = false, black = false }) {
         },
       },
       {
-        scope: [
-          'entity.name.tag',
-          'tag.html',
-        ],
+        scope: ['entity.name.tag', 'tag.html'],
         settings: {
-          foreground: vitesse('keyword'),
+          foreground: violet('keyword'),
         },
       },
       {
         scope: 'entity.name.function',
         settings: {
-          foreground: vitesse('function'),
+          foreground: violet('function'),
         },
       },
       {
-        scope: [
-          'keyword',
-          'storage.type.class.jsdoc',
-        ],
+        scope: ['keyword', 'storage.type.class.jsdoc'],
         settings: {
-          foreground: vitesse('keyword'),
+          foreground: violet('keyword'),
         },
       },
       {
@@ -341,96 +328,67 @@ export default function getTheme({ style, name, soft = false, black = false }) {
           'constant.language.null',
         ],
         settings: {
-          foreground: vitesse('builtin'),
+          foreground: violet('builtin'),
         },
       },
       {
-        scope: [
-          'storage.modifier.package',
-          'storage.modifier.import',
-          'storage.type.java',
-        ],
+        scope: ['storage.modifier.package', 'storage.modifier.import', 'storage.type.java'],
         settings: {
           foreground,
         },
       },
       {
-        scope: [
-          'string',
-          'string punctuation.section.embedded source',
-          'attribute.value',
-        ],
+        scope: ['string', 'string punctuation.section.embedded source', 'attribute.value'],
         settings: {
-          foreground: vitesse('string'),
+          foreground: violet('string'),
         },
       },
       {
-        scope: [
-          'punctuation.definition.string',
-          'punctuation.support.type.property-name',
-        ],
+        scope: ['punctuation.definition.string', 'punctuation.support.type.property-name'],
         settings: {
-          foreground: vitesse('string', 'aa'),
+          foreground: violet('string', 'aa'),
         },
       },
       {
         scope: 'support',
         settings: {
-          foreground: vitesse('property'),
+          foreground: violet('property'),
         },
       },
       {
-        scope: [
-          'property',
-          'meta.property-name',
-          'meta.object-literal.key',
-          'entity.name.tag.yaml',
-          'attribute.name',
-        ],
+        scope: ['property', 'meta.property-name', 'meta.object-literal.key', 'entity.name.tag.yaml', 'attribute.name'],
         settings: {
-          foreground: vitesse('property'),
+          foreground: violet('property'),
         },
       },
       {
-        scope: [
-          'entity.other.attribute-name',
-          'invalid.deprecated.entity.other.attribute-name.html',
-        ],
+        scope: ['entity.other.attribute-name', 'invalid.deprecated.entity.other.attribute-name.html'],
         settings: {
-          foreground: vitesse('variable'),
+          foreground: violet('variable'),
         },
       },
       {
-        scope: [
-          'variable',
-          'identifier',
-        ],
+        scope: ['variable', 'identifier'],
         settings: {
-          foreground: vitesse('variable'),
+          foreground: violet('variable'),
         },
       },
       {
-        scope: [
-          'support.type.primitive',
-          'entity.name.type',
-        ],
+        scope: ['support.type.primitive', 'entity.name.type'],
         settings: {
-          foreground: vitesse('type'),
+          foreground: violet('type'),
         },
       },
       {
         scope: 'namespace',
         settings: {
-          foreground: vitesse('namespace'),
+          foreground: violet('namespace'),
         },
       },
       {
-        scope: [
-          'keyword.operator',
-          'meta.var.expr.ts',
-        ],
+        scope: ['keyword.operator', 'meta.var.expr.ts'],
         settings: {
-          foreground: vitesse('operator'),
+          foreground: violet('operator'),
         },
       },
       {
@@ -485,13 +443,13 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       {
         scope: 'string variable',
         settings: {
-          foreground: vitesse('string'),
+          foreground: violet('string'),
         },
       },
       {
         scope: ['source.regexp', 'string.regexp'],
         settings: {
-          foreground: vitesse('regex'),
+          foreground: violet('regex'),
         },
       },
       {
@@ -502,47 +460,37 @@ export default function getTheme({ style, name, soft = false, black = false }) {
           'string.regexp string.regexp.arbitrary-repitition',
         ],
         settings: {
-          foreground: vitesse('string'),
+          foreground: violet('string'),
         },
       },
       {
         scope: 'string.regexp constant.character.escape',
         settings: {
-          foreground: vitesse('yellow'),
+          foreground: violet('yellow'),
         },
       },
       {
-        scope: [
-          'support.constant',
-        ],
+        scope: ['support.constant'],
         settings: {
-          foreground: vitesse('constant'),
+          foreground: violet('constant'),
         },
       },
       {
-        scope: [
-          'constant.numeric',
-          'number',
-        ],
+        scope: ['constant.numeric', 'number'],
         settings: {
-          foreground: vitesse('number'),
+          foreground: violet('number'),
         },
       },
       {
-        scope: [
-          'keyword.other.unit',
-        ],
+        scope: ['keyword.other.unit'],
         settings: {
-          foreground: vitesse('builtin'),
+          foreground: violet('builtin'),
         },
       },
       {
-        scope: [
-          'constant.language.boolean',
-          'constant.language',
-        ],
+        scope: ['constant.language.boolean', 'constant.language'],
         settings: {
-          foreground: vitesse('boolean'),
+          foreground: violet('boolean'),
         },
       },
       {
@@ -554,7 +502,7 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       {
         scope: 'punctuation.definition.list.begin.markdown',
         settings: {
-          foreground: vitesse('orange'),
+          foreground: violet('orange'),
         },
       },
       {
@@ -567,7 +515,7 @@ export default function getTheme({ style, name, soft = false, black = false }) {
       {
         scope: 'markup.quote',
         settings: {
-          foreground: vitesse('interface'),
+          foreground: violet('interface'),
         },
       },
       {
@@ -591,22 +539,14 @@ export default function getTheme({ style, name, soft = false, black = false }) {
         },
       },
       {
-        scope: [
-          'markup.deleted',
-          'meta.diff.header.from-file',
-          'punctuation.definition.deleted',
-        ],
+        scope: ['markup.deleted', 'meta.diff.header.from-file', 'punctuation.definition.deleted'],
         settings: {
           background: primer.red[0],
           foreground: primer.red[7],
         },
       },
       {
-        scope: [
-          'markup.inserted',
-          'meta.diff.header.to-file',
-          'punctuation.definition.inserted',
-        ],
+        scope: ['markup.inserted', 'meta.diff.header.to-file', 'punctuation.definition.inserted'],
         settings: {
           background: primer.green[0],
           foreground: primer.green[6],
@@ -679,38 +619,30 @@ export default function getTheme({ style, name, soft = false, black = false }) {
           'punctuation.definition.string.end.markdown',
         ],
         settings: {
-          foreground: vitesse('string'),
+          foreground: violet('string'),
         },
       },
       {
-        scope: [
-          'markup.underline.link.markdown',
-        ],
+        scope: ['markup.underline.link.markdown'],
         settings: {
           foreground: secondaryForeground,
           fontStyle: 'underline',
         },
       },
       {
-        scope: [
-          'type.identifier',
-        ],
+        scope: ['type.identifier'],
         settings: {
-          foreground: vitesse('class'),
+          foreground: violet('class'),
         },
       },
       {
-        scope: [
-          'entity.other.attribute-name.html.vue',
-        ],
+        scope: ['entity.other.attribute-name.html.vue'],
         settings: {
-          foreground: vitesse('function'),
+          foreground: violet('function'),
         },
       },
       {
-        scope: [
-          'invalid.illegal.unrecognized-tag.html',
-        ],
+        scope: ['invalid.illegal.unrecognized-tag.html'],
         settings: {
           fontStyle: 'normal',
         },
