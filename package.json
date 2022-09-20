@@ -1,9 +1,9 @@
 {
-  "name": "theme-vitesse",
-  "displayName": "Vitesse Theme",
-  "version": "0.5.2",
-  "packageManager": "pnpm@7.5.0",
-  "description": "Vitesse theme for VS Code",
+  "name": "violet-theme",
+  "displayName": "Violet Theme",
+  "version": "0.0.0",
+  "packageManager": "pnpm@7.12.1",
+  "description": "Violet Theme for VS Code",
   "categories": [
     "Themes"
   ],
@@ -16,48 +16,31 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/vscode-theme-vitesse"
+    "url": "https://github.com/flingyp/vscode-theme-violet.git"
   },
   "files": [
     "themes"
   ],
   "bugs": {
-    "url": "https://github.com/antfu/vscode-theme-vitesse/issues"
+    "url": "https://github.com/flingyp/vscode-theme-violet/issues"
   },
-  "publisher": "antfu",
+  "publisher": "FlyPeng",
   "scripts": {
     "build": "esno src/index.ts",
-    "dev": "nodemon --watch src -e ts --exec \"esno src/index.ts\"",
-    "vscode:prepublish": "npm run build",
-    "lint": "eslint .",
-    "release": "npm run build && npx bumpp --commit --tag --push --all && vsce publish --no-dependencies"
+    "dev": "nodemon --watch src -e ts --exec pnpm build",
+    "lint": "eslint ."
   },
   "contributes": {
     "themes": [
       {
-        "label": "Vitesse Light",
+        "label": "Violet Light",
         "uiTheme": "vs",
-        "path": "./themes/vitesse-light.json"
+        "path": "./themes/violet-light.json"
       },
       {
-        "label": "Vitesse Dark",
+        "label": "Violet Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/vitesse-dark.json"
-      },
-      {
-        "label": "Vitesse Black",
-        "uiTheme": "vs-dark",
-        "path": "./themes/vitesse-black.json"
-      },
-      {
-        "label": "Vitesse Light Soft",
-        "uiTheme": "vs",
-        "path": "./themes/vitesse-light-soft.json"
-      },
-      {
-        "label": "Vitesse Dark Soft",
-        "uiTheme": "vs-dark",
-        "path": "./themes/vitesse-dark-soft.json"
+        "path": "./themes/violet-dark.json"
       }
     ]
   },
@@ -70,6 +53,7 @@
     "eslint": "^8.12.0",
     "esno": "^0.14.1",
     "nodemon": "^2.0.15",
+    "prettier": "^2.7.1",
     "tsup": "^5.12.4",
     "typescript": "^4.6.3",
     "vsce": "^2.7.0"
